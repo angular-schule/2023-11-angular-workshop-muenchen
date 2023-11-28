@@ -4,7 +4,8 @@
 <app-book [book]="books[2]" />
 -->
 
-<app-book
-  *ngFor="let b of books"
-  [book]="b"
-/>
+@for (b of books; track $index) {
+  <app-book
+    [book]="b"
+  />
+}
