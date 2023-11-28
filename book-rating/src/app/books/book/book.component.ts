@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Book } from '../shared/book';
 
@@ -14,8 +14,17 @@ export class BookComponent {
   @Input({ required: true })
   book?: Book;
 
-  constructor() {
-    console.log(this.book);
+  @Output()
+  rateUp = new EventEmitter<Book>();
+
+  @Output()
+  rateDown = new EventEmitter<Book>();
+
+  doRateUp() {
+    this.rateUp.emit(this.book);
   }
 
+  doRateDown() {
+    this.rateDown.emit(this.book);
+  }
 }
