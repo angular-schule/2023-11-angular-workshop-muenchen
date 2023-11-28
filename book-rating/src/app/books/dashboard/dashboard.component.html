@@ -7,5 +7,7 @@
 @for (b of books; track $index) {
   <app-book
     [book]="b"
+    (rateUp)="doRateUp($event)"
+    (rateDown)="doRateDown($event)"
   />
 }
