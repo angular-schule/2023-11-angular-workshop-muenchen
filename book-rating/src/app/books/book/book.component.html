@@ -11,8 +11,17 @@
       </div>
       <p>{{ book.description }}</p>
 
-      <button class="btn btn-primary me-2">-</button>
-      <button class="btn btn-primary">+</button>
+      <!--
+        BAD PRACTICE!
+
+        1. Logik im Template
+        2. Seperation of Concerns
+        3. Immutability
+
+      -->
+
+      <button class="btn btn-primary me-2" (click)="book.rating = book.rating - 1">-</button>
+      <button class="btn btn-primary"      (click)="book.rating = book.rating + 1">+</button>
     </div>
   </div>
 }
