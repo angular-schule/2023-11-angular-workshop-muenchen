@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Book } from '../shared/book';
 import { BookComponent } from '../book/book.component';
+import { BookRatingService } from '../shared/book-rating.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,8 @@ import { BookComponent } from '../book/book.component';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+
+  br = inject(BookRatingService);
 
   books: Book[] = [
     {
@@ -33,11 +36,20 @@ export class DashboardComponent {
     }
   ];
 
+
   doRateUp(book: Book) {
-    console.log(book); // TODO: morgen!
+    const ratedBook = this.br.rateUp(book);
+    this.updateAndSortList(ratedBook);
   }
 
   doRateDown(book: Book) {
-    console.log(book); // TODO: morgen!
+    const ratedBook = this.br.rateDown(book);
+    this.updateAndSortList(ratedBook);
+  }
+
+  updateAndSortList(ratedBook: Book) {
+    this.books = this.books
+      .map(b => b.isbn === ratedBook.isbn ? ratedBook : b)
+      .sort((a, b) => b.rating - a.rating)
   }
 }
