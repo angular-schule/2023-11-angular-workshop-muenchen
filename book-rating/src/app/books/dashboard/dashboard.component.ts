@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Book } from '../shared/book';
 import { BookComponent } from '../book/book.component';
@@ -9,7 +9,8 @@ import { BookRatingService } from '../shared/book-rating.service';
   standalone: true,
   imports: [CommonModule, BookComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent {
 
@@ -35,6 +36,10 @@ export class DashboardComponent {
       rating: 1
     }
   ];
+
+  constructor(private cd: ChangeDetectorRef) {
+    // setTimeout(() => { this.books = []; cd.detectChanges() }, 5000);
+  }
 
 
   doRateUp(book: Book) {
