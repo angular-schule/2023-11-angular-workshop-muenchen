@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Book } from '../shared/book';
 import { BookComponent } from '../book/book.component';
 import { BookRatingService } from '../shared/book-rating.service';
+import { BookCreateComponent } from '../book-create/book-create.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, BookComponent],
+  imports: [CommonModule, BookComponent, BookCreateComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   // changeDetection: ChangeDetectionStrategy.OnPush
