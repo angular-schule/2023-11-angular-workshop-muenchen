@@ -4,6 +4,7 @@ import { Book } from '../shared/book';
 import { BookComponent } from '../book/book.component';
 import { BookRatingService } from '../shared/book-rating.service';
 import { BookCreateComponent } from '../book-create/book-create.component';
+import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,30 +17,13 @@ import { BookCreateComponent } from '../book-create/book-create.component';
 export class DashboardComponent {
 
   br = inject(BookRatingService);
+  bs = inject(BookStoreService);
 
-  books: Book[] = [
-    {
-      isbn: '000',
-      title: 'Angular',
-      description: 'Tolles Buch',
-      rating: 5
-    },
-    {
-      isbn: '111',
-      title: 'AngularJS',
-      description: 'Altes Buch',
-      rating: 3
-    },
-    {
-      isbn: '222',
-      title: 'jQuery',
-      description: 'Uraltes Buch',
-      rating: 1
-    }
-  ];
+  books: Book[] = [];
 
   constructor(private cd: ChangeDetectorRef) {
     // setTimeout(() => { this.books = []; cd.detectChanges() }, 5000);
+    this.bs.getAllBooks().subscribe(books => this.books = books);
   }
 
 
