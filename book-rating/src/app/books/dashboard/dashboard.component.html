@@ -1,4 +1,6 @@
-<app-book-create />
+<app-book-create
+  (create)="doCreate($event)"
+/>
 
 @for (b of books; track $index) {
   <app-book
