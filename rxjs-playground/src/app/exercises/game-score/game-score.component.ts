@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Subject, ReplaySubject, scan, reduce } from 'rxjs';
 import { HistoryComponent } from '../../shared/history/history.component';
+import { JsonPipe } from '@angular/common';
 
 @Component({
     templateUrl: './game-score.component.html',
     standalone: true,
-    imports: [HistoryComponent]
+    imports: [HistoryComponent, JsonPipe]
 })
 export class GameScoreComponent {
 
