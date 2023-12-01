@@ -23,7 +23,7 @@ export class DashboardComponent {
 
   constructor(private cd: ChangeDetectorRef) {
     // setTimeout(() => { this.books = []; cd.detectChanges() }, 5000);
-    this.bs.getAllBooks().subscribe(books => this.books = books);
+    // this.bs.getAllBooks().subscribe(books => this.books = books);
   }
 
 
