@@ -1,7 +1,8 @@
 import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { map } from 'rxjs';
+import { map, mergeMap } from 'rxjs';
+import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
   selector: 'app-book-details',
@@ -12,8 +13,11 @@ import { map } from 'rxjs';
 })
 export class BookDetailsComponent {
 
+  bookStore = inject(BookStoreService);
+
   book$ = inject(ActivatedRoute).paramMap.pipe(
-    map(paramMap => paramMap.get('isbn') || '')
+    map(paramMap => paramMap.get('isbn') || ''),
+    mergeMap(isbn => this.bookStore.getSingleBook(isbn))
   );
 
 }
