@@ -2,7 +2,7 @@
   (create)="doCreate($event)"
 />
 
-@for (b of books; track $index) {
+@for (b of books$ | async; track $index) {
   <app-book
     [book]="b"
     (rateUp)="doRateUp($event)"
@@ -10,6 +10,8 @@
   />
 }
 
+<h3 *ngIf="booksLoading$ | async">Loading</h3>
+
 <strong>
-Anzahl der Bücher: {{ books.length }}
+Anzahl der Bücher: {{ (books$ | async)?.length }}
 </strong>
